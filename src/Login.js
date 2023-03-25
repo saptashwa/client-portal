@@ -25,21 +25,22 @@ function Login() {
       .then(response => {
         // handle successful login
        
-          
+          console.log(response);
           localStorage.setItem('token',response.data.token)
         
       })
       .catch(error => {
         // handle login error
+
       });
     };
  
   return (
     <div className='container'>
-      <h1>Login Page</h1>
+      <h1 className='highlight'>Login Page</h1>
       <input placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)}></input><br/>
       <input placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}></input><br/>
-      <button onClick={handleLogin}>Login</button>
+      <button className='submit-button' onClick={handleLogin}>Login</button>
       <p>Don't have an account? <Link to="/Register">Register</Link></p>
     </div>
   );
