@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import { useState } from 'react';
-import {handleLogin} from './Commonapis';
 import axios from 'axios';
 
 function Login() {
@@ -27,7 +26,7 @@ function Login() {
         // handle successful login
        
           
-          localStorage.setItem('token',response.body.token)
+          localStorage.setItem('token',response.data.token)
         
       })
       .catch(error => {
