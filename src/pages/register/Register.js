@@ -1,46 +1,36 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
-// import { handleRegister } from "./Commonapis";
-import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { registerUser } from "../../shared/services/crud-service";
 
 function Register() {
   const [firstname, setFirstname] = useState("");
-  const [middlename, setMiddlename] = useState("");
   const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [contactNo, setContactNo] = useState("");
 
+  const displayLoginNotification = (type, message) => {
+    if (type === 'success') {
+      toast.success(message);
+    } else if (type === 'error') {
+      toast.error(message);
+    }
+  };
 
   const handleRegister = () => {
-    const params = {
-      headers: {
-        'Content-Type': 'application/json',
-        'accept':'application/json'
-      },
-
-    }
-    const registerBody = {
-      firstName:firstname,
-      lastName:lastName,
-      email:email,
-      password:password,
-      username:email,
-      contactNumber:contactNo
-     
-    };
-    console.log(registerBody);
-    const registerUrl = "http://localhost:3000/api/users/register";
-      axios.post(registerUrl,registerBody,params )
-      .then(response => {
-       console.log(response.data);
-      })
-      .catch(error => {
-        // handle Register error
-      });
-    };
+    registerUser(firstname, lastName, email, password, contactNo)
+    .then(response => {
+      displayLoginNotification("success", "User Created Successfully.");
+    })
+    .catch(error => {
+      // handle Register error
+      displayLoginNotification("error", "Please check your details!");
+    });
+  };
 
   return (
     <div div className="container">
@@ -51,13 +41,6 @@ function Register() {
         value={firstname}
         onChange={(e) => setFirstname(e.target.value)}
         required="true"
-      ></input>
-      <br />
-
-      <input
-        placeholder="Enter Middle Name"
-        value={middlename}
-        onChange={(e) => setMiddlename(e.target.value)}
       ></input>
       <br />
 
@@ -109,6 +92,7 @@ function Register() {
       <p>
         Already have an account? <Link to="/login">Login</Link>
       </p>
+      <ToastContainer />
     </div>
   );
 }

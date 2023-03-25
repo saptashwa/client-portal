@@ -2,37 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import { useState } from "react";
-import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { loginUser } from '../../shared/services/crud-service';
+
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const displayLoginNotification = (type, message) => {
+    if (type === 'success') {
+      toast.success(message);
+    } else if (type === 'error') {
+      toast.error(message);
+    }
+  };
   const handleLogin = () => {
-    const params = {
-      headers: {
-        "Content-Type": "application/json",
-        accept: "application/json",
-      },
-    };
-    const loginBody = {
-      email: username,
-      password: password,
-    };
-    console.log(loginBody);
-    const loginUrl = "http://localhost:3000/api/users/login";
-    axios
-      .post(loginUrl, loginBody, params)
-      .then((response) => {
-        // handle successful login
-       
-          console.log(response);
-          localStorage.setItem('token',response.data.token)
-        
-      })
-      .catch((error) => {
-        // handle login error
-
-      });
+    loginUser(username, password)
+    .then((response) => {
+      console.log(response);
+      displayLoginNotification("success", "Succesfully Logged In!");
+      localStorage.setItem('token',response.data.token);
+      localStorage.setItem('userId',response.data.userId);
+    })
+    .catch((error) => {
+      displayLoginNotification("error", "Unauthorized user!! Please check your username and password!!");
+    })
   };
 
   return (
@@ -54,7 +49,9 @@ function Login() {
       <p>
         Don't have an account? <Link to="/Register">Register</Link>
       </p>
+      <ToastContainer />
     </div>
+    
   );
 }
 

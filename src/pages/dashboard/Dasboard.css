@@ -1,0 +1,28 @@
+.dashboard-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+    text-align: left;
+  }
+  
+  .dashboard-table th {
+    background-color: #f2f2f2;
+    color: #333333;
+    font-weight: bold;
+    padding: 12px;
+    text-transform: uppercase;
+    border: 1px solid #cccccc;
+  }
+  
+  .dashboard-table td {
+    border: 1px solid #cccccc;
+    padding: 12px;
+  }
+  
+  .dashboard-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .dashboard-table-container {
+    overflow-x: auto;
+  }

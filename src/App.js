@@ -1,19 +1,22 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './Login';
-import Register from './Register';
-import ToastMessge from './shared/toaster';
+import Login from './pages/login/Login';
+import Register from './pages/register/Register';
+import Dashboard from './pages/dashboard/Dasboard';
+import "./App.css";
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/register">
-          <ToastMessge/>
           <Register />
         </Route>
-        <Route path="/">
+        <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard/>
         </Route>
       </Switch>
     </Router>
