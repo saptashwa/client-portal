@@ -32,7 +32,7 @@ function Dashboard() {
                     "propValue": true / false
                 }
             ]
-            
+
          */
      }
       
@@ -53,6 +53,7 @@ function Dashboard() {
             return (
               <tr key={key}>
                 <td className="dashboard-table-td">{val._id}</td>
+                <td className="dashboard-table-td">{val.fastName}</td>
                 <td className="dashboard-table-td">{val.lastName}</td>
                 <td className="dashboard-table-td">{val.contactNumber}</td>
                 <td className="dashboard-table-td">{val.email}</td>
