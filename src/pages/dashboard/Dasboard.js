@@ -34,6 +34,7 @@ function Dashboard() {
             ]
 
          */
+        console.log(users);
      }
       
   return (
@@ -59,12 +60,16 @@ function Dashboard() {
                 <td className="dashboard-table-td">{val.email}</td>
                 <td className="dashboard-table-td">
                     <label for="superadmin">Super Admin</label>
-                    <input name="superadmin" type="checkbox" value={val.userRole.superAdmin}/>
+                    <input name="superadmin" type="checkbox" defaultChecked={val.userRole.superAdmin}
+                    value={val.userRole.superAdmin} onChange={(event) => {
+                      // console.log("event", event.target.checked )
+                      val.userRole.superAdmin = event.target.checked;
+                    }}/>
                     <label for="admin">Admin</label>
                     <input name="admin" type="checkbox" value={val.userRole.admin}/>
                 </td>
                 <td className="dashboard-table-td">
-                    <button class="action-button m-r-2">Update</button>
+                    <button class="action-button m-r-2" onClick={handleUpdate}>Update</button>
                     <button class="action-button">Delete</button>
                 </td>
               </tr>
